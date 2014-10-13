@@ -12,4 +12,10 @@ class PasteController < ApplicationController
     @paste.content = params[:content]
   end
 
+  private
+
+    def paste_params
+      params.require(:paste).permit(:content)
+    end
+
 end

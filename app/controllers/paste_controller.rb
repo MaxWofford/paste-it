@@ -1,5 +1,4 @@
 class PasteController < ApplicationController
-
   def new
     @paste = Paste.create
     redirect_to "/#{@paste.token}"
@@ -8,8 +7,10 @@ class PasteController < ApplicationController
     @paste = Paste.where(token: params[:token])
   end
   def update
-    @paste = Paste.where(token: params[:token])
-    @paste.content = params[:content]
+    @paste = Paste.where(token: params[:token]).first
+    @content = params[:content]
+    @paste.update(content: @content)
+    render "success"
   end
 
   private

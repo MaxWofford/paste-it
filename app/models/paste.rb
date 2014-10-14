@@ -1,8 +1,5 @@
 class Paste < ActiveRecord::Base
-  before_validation :generate_token
-
-  validates :token, presence: true
-
+  before_create :generate_token
   def generate_token
     self.token = loop do
       random_token = SecureRandom.urlsafe_base64(3, false)

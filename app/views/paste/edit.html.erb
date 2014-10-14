@@ -1,6 +1,30 @@
+<script> 
+  function update(token, paste) {
+  $.ajax({
+    type: "POST",
+    url: window.location.origin + "/" + token,
+    data: paste,
+    error: function (info){
+      console.log(info.responseText)
+    },
+    dataType: "text/plain"  
+  })
+}
 
+var ready;
+ready = function() {
+  $('#paste-area').on('input propertychange paste', function() {
+    var currentUrl = window.location.href.split( '/' )
+    var token = currentUrl[currentUrl.length - 1]
+    var content = $('#paste-area').val()
+    update(token, content)
+  });
 
-<form action="edit_submit" method="get" accept-charset="utf-8">
-  <textarea spellcheck="true" wrap="soft" name="" style="width: 100vw; height: 100vh;"><%= @paste.first.content %></textarea>
-</form>
+};
+
+$(document).ready(ready);
+$(document).on('page:load', ready);
+
+</script>
+<textarea id="paste-area" spellcheck="true" autofocus="true" wrap="soft" name="" style="width: 100vw; height: 100vh; border: none;"><%= @paste.first.content %></textarea>
 <%= link_to "new", new_paste_path %>

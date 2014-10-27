@@ -7,17 +7,13 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
 gem 'turbolinks'
-gem 'jbuilder', '~> 2.0'
+gem 'pg'
+
 group :doc do
   gem 'sdoc', '~> 0.4.0'
 end
 
 group :development do
-  gem 'sqlite3'
   gem 'spring'
   gem 'pry'
-end
-
-group :production do
-  gem 'pg'
 end
